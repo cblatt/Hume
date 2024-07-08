@@ -13,7 +13,6 @@ function App() {
 	return (
 		<>
 			<div className="text-center">
-				<button onClick={apiCall}>Make API Call</button>
 				<VideoRecorder />
 			</div>
 		</>
