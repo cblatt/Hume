@@ -52,7 +52,7 @@ const VideoRecorder = () => {
 			formData.append("video", blob);
 
 			axios
-				.post("http://localhost:8080/api/upload", formData, {
+				.post(`${process.env.REACT_APP_API_URL}/api/upload`, formData, {
 					headers: {
 						"Content-Type": "multipart/form-data",
 					},
