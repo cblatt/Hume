@@ -1,13 +1,7 @@
 
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
-import VideoRecorder from './VideoRecorder'
-
-const apiCall = () => {
-	axios.get("http://localhost:8080").then((data) => {
-		console.log(data);
-	});
-};
+import VideoRecorder from './components/VideoRecorder'
 
 function App() {
 	return (

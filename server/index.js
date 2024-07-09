@@ -5,24 +5,19 @@ const fs = require("fs");
 const path = require("path");
 const FormData = require("form-data");
 const cors = require("cors");
+require('dotenv').config();
 
 const app = express();
 const upload = multer({ dest: "uploads/" });
 
 const HUME_API_URL = "https://api.hume.ai/v0/batch/jobs";
-const API_KEY = "26H86YGSfbIl1or7Xv5klqSdPEBLWGA9mX5cXnAooTTuzSzr";
+const API_KEY = process.env.HUME_API_KEY;
 
 app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
 	res.send("Hello from our server!");
-});
-
-// Simple test endpoint
-app.get("/api/test", (req, res) => {
-	console.log("Test endpoint hit");
-	res.json({ message: "Backend is working" });
 });
 
 app.post("/api/upload", upload.single("video"), async (req, res) => {
@@ -91,6 +86,14 @@ app.post("/api/upload", upload.single("video"), async (req, res) => {
 
 		// Send the full prediction response to the frontend
 		res.json(predictionResponse.data);
+
+		// Delete the video file after processing
+		fs.unlink(videoPath, (err) => {
+			if (err) {
+				console.error("Failed to delete video file:", err);
+			}
+		});
+
 	} catch (error) {
 		if (error.response) {
 			console.error("Error response data:", error.response.data);
