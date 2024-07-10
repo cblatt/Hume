@@ -72,17 +72,28 @@ const VideoRecorder = () => {
 	return (
 		<div>
 			<Webcam audio={true} ref={webcamRef} muted={true} />
-			<div>
-				<button onClick={handleStartCaptureClick} disabled={recording}>
-					{recording ? "Recording..." : "Start Capture"}
-				</button>
-				<button onClick={handleStopCaptureClick} disabled={!recording}>
-					Stop Capture
-				</button>
-				<button onClick={handleUploadClick} disabled={uploading || recording}>
-					{uploading ? "Uploading..." : "Upload"}
-				</button>
+			<div
+				style={{
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center"
+				}}>
+				<div style={{ display: "flex", justifyContent: "space-between", width: "30%" }}>
+					<button
+						className="btn btn-primary"
+						onClick={handleStartCaptureClick}
+						disabled={recording}>
+						{recording ? "Recording..." : "Start Capture"}
+					</button>
+					<button className="btn btn-primary" onClick={handleStopCaptureClick} disabled={!recording}>
+						Stop Capture
+					</button>
+					<button className="btn btn-primary" onClick={handleUploadClick} disabled={uploading || recording}>
+						{uploading ? "Uploading..." : "Upload"}
+					</button>
+				</div>
 			</div>
+
 			{videoURL && (
 				<div>
 					<h3>Recorded Video:</h3>
